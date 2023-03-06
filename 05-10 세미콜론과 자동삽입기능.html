@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>세미콜론과 자동삽입기능</title>
+</head>
+<body>
+  <script>
+    function foo(){
+      return {}
+      // ASI 동작 결과 => return; {};
+      // 개발자의 예측 => return {};
+    }
+    console.log(foo()); //undefined
+    var bar = function(){}
+    (function(){})();
+    // ASI 동작 결과 => var bar = function() {}(function() {})();
+    // 개발자의 예측 => var bar = function() {};(function() {})();
+    // TypeError: (intermediate value)(...) is not a function
+  </script>
+</body>
+</html>
